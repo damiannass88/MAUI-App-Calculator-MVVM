@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calculator_MAUI_App.Views.MainPage"
+             xmlns:modelViews="clr-namespace:Calculator_MAUI_App.ModelViews"
+             BackgroundColor="WhiteSmoke"
+             Title="MAUI App"
+             NavigationPage.HasBackButton="True"
+             NavigationPage.HasNavigationBar="False">
+    
+    <ContentPage.BindingContext>
+        <modelViews:MainPageModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="BackgroundColor" Value="#ad1bd7" />
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <Setter.Value >
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Scale"
+                            Value="1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="Scale"
+                            Value="0.95" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Brush="Black" Offset="4,4" Radius="10" Opacity="1"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="StrokeShape" Value="RoundRectangle 30,0,0,20"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="#000080"/>
+            <Setter Property="Stroke">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,1">
+                        <GradientStop Color="Orange"
+                          Offset="0.5" />
+                        <GradientStop Color="Brown"
+                          Offset="1.0" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Brush="Black" Radius="25" Opacity="1"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="FontSize" Value="38"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="End"/>
+            <Setter Property="Keyboard" Value="Numeric"/>
+            <Setter Property="Placeholder" Value="0"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="TextColor" Value="#F0F0F0"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Brush="Black" Radius="13" Offset="10,5" Opacity="1"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <Grid
+        ColumnDefinitions="80, 80, 80, 80"
+        RowDefinitions="70, 70, 70, 70, 70,70"
+        ColumnSpacing="4"
+        RowSpacing="4"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand">
+        <Border>
+            <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="70"
+                HorizontalOptions="Center" >
+                <Image.Shadow>
+                    <Shadow Brush="White"
+                Offset="-6,-6"
+                                Radius="3"
+                Opacity="0.1"/>
+                </Image.Shadow>
+            </Image>
+        </Border>
+        <Entry Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding ScreenDisplay, Mode=OneWay}"/>
+        <Button Grid.Row="2" Grid.Column="2" Text="9" Command="{Binding AddNumberCommand}" CommandParameter="9" />
+        <Button Grid.Row="2" Grid.Column="1" Text="8" Command="{Binding AddNumberCommand}" CommandParameter="8" />
+        <Button Grid.Row="2" Text="7" Command="{Binding AddNumberCommand}" CommandParameter="7" />
+        <Button Grid.Row="3" Grid.Column="2" Text="6" Command="{Binding AddNumberCommand}" CommandParameter="6" />
+        <Button Grid.Row="3" Grid.Column="1" Text="5" Command="{Binding AddNumberCommand}" CommandParameter="5" />
+        <Button Grid.Row="3" Text="4" Command="{Binding AddNumberCommand}" CommandParameter="4" />
+        <Button Grid.Row="4" Grid.Column="2" Text="3" Command="{Binding AddNumberCommand}" CommandParameter="3" />
+        <Button Grid.Row="4" Grid.Column="1" Text="2" Command="{Binding AddNumberCommand}" CommandParameter="2" />
+        <Button Grid.Row="4" Text="1" Command="{Binding AddNumberCommand}" CommandParameter="1" />
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Text="0" Command="{Binding AddNumberCommand}" CommandParameter="0" />
+        <Button Grid.Row="5" Grid.Column="2" Text="," Command="{Binding AddNumberCommand}" CommandParameter="," />
+        <Button Grid.Row="1" Grid.Column="1" Text="/" Command="{Binding AddOperationCommand}" CommandParameter="/" />
+        <Button Grid.Row="2" Grid.Column="3" Text="-" Command="{Binding AddOperationCommand}" CommandParameter="-" />
+        <Button Grid.Row="1" Grid.Column="0" Text="*" Command="{Binding AddOperationCommand}" CommandParameter="*" />
+        <Button Grid.Row="1" Grid.Column="2" Text="C" Command="{Binding ClearScreenCommand}" />
+        <Button Grid.Row="3" Grid.Column="3" Text="+" Command="{Binding AddOperationCommand}" CommandParameter="+" />
+        <Button Grid.Row="1" Grid.Column="3" Text="⬅" Command="{Binding BackspaceCommand}" FontSize="34"/>
+        <Button Grid.Row="4" Grid.Column="3" Grid.RowSpan="2" Text="=" Command="{Binding GetResultCommand}"/>
+    </Grid>
+</ContentPage>
